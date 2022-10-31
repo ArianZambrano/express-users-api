@@ -4,8 +4,13 @@ const { Router } = require("express");
 const PostUserFlow = require("../apis/users/postUser/flow");
 const PostUserValidators = require("../apis/users/postUser/validators");
 
+//Login Flow and Validators
+const LoginUserFlow = require("../apis/users/loginUser/flow");
+const LoginUserValidators = require("../apis/users/loginUser/validators");
+
 const router = Router();
 
 router.post("/", PostUserValidators, PostUserFlow);
+router.post("/login", LoginUserValidators, LoginUserFlow);
 
 module.exports = router;
