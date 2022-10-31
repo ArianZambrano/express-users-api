@@ -1,48 +1,45 @@
 const { Schema, model } = require("mongoose");
 
-const UserSchema = Schema(
-  {
+const UserSchema = Schema({
     name: {
-      type: String,
-      required: true,
+        type: String,
+        required: true
     },
     description: {
-      type: String,
+        type: String
     },
     email: {
-      type: String,
-      required: true,
+        type: String,
+        required: true
     },
     password: {
-      type: String,
-      required: true,
+        type: String,
+        required: true
     },
     profileImage: {
-      type: String,
+        type: String
     },
     followers: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
     ],
     following: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-      },
-    ],
-  },
-  {
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }
+    ]
+}, {
     timestamps: true,
-    versionKey: false,
-  }
-);
+    versionKey: false
+});
 
 UserSchema.methods.toJSON = function () {
-  const { _id, ...user } = this.toObject();
-  user.userId = _id;
-  return user;
-};
+    const { _id, ...user } = this.toObject();
+    user.userId = _id;
+    return user;
+}
 
-module.exports = model("User", UserSchema);
+module.exports = model('User', UserSchema);
