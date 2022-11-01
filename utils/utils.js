@@ -32,8 +32,16 @@ const errorFactory = (msg, statusCode) => {
   return error;
 };
 
+const parseSort = ( sort, order) => {
+    if(order == 'desc') {
+        sort = "-" + sort;
+    }
+    return sort;
+}
+
 module.exports = {
   encryptPassword,
   generateJWT,
   errorFactory,
+  parseSort
 };

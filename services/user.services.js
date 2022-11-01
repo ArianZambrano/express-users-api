@@ -52,7 +52,16 @@ class UserService {
     }
 
     return user;
-}
+  }
+
+  async getUsers(query, from, limit, sort) {
+    const [total, users] = await Promise.all([
+        User.countDocuments(query),
+        User.find(query).skip(from).limit(limit).sort(sort).exec()
+    ]);
+    return { total, users };
+  }
+  
 }
 
 const userService = new UserService();
