@@ -12,10 +12,17 @@ const LoginUserValidators = require("../apis/users/loginUser/validators");
 const GetUserFlow = require('../apis/users/getUser/flow');
 const GetUserValidators = require('../apis/users/getUser/validators');
 
+//GetUsers Flow and Validators
+const GetUsersFlow = require('../apis/users/getUsers/flow');
+const GetUsersValidators = require('../apis/users/getUsers/validators');
+
 const router = Router();
 
 router.post("/", PostUserValidators, PostUserFlow);
 router.post("/login", LoginUserValidators, LoginUserFlow);
+
+router.get('/:id', GetUserValidators, GetUserFlow);
+router.get('/', GetUsersValidators, GetUsersFlow);
 
 router.put('/follow', FollowUserValidators, FollowUserFlow);
 router.put('/unfollow', UnfollowUserValidators, UnfollowUserFlow);
