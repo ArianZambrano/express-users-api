@@ -13,4 +13,7 @@ const router = Router();
 router.post("/", PostUserValidators, PostUserFlow);
 router.post("/login", LoginUserValidators, LoginUserFlow);
 
+router.put('/follow', FollowUserValidators, FollowUserFlow);
+router.put('/unfollow', UnfollowUserValidators, UnfollowUserFlow);
+
 module.exports = router;
