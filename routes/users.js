@@ -8,6 +8,10 @@ const PostUserValidators = require("../apis/users/postUser/validators");
 const LoginUserFlow = require("../apis/users/loginUser/flow");
 const LoginUserValidators = require("../apis/users/loginUser/validators");
 
+//GetUser Flow and Validators
+const GetUserFlow = require('../apis/users/getUser/flow');
+const GetUserValidators = require('../apis/users/getUser/validators');
+
 const router = Router();
 
 router.post("/", PostUserValidators, PostUserFlow);

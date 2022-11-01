@@ -26,6 +26,33 @@ class UserService {
       token: await generateJWT(user.id),
     };
   }
+
+  async getUserById(id, followers, following) {
+    const user = await User.findById(id).exec();
+    if(followers){ 
+        await User.populate(
+            user,
+            {
+                path: 'followers', 
+                model: 'User',
+                select: 'name profileImage'
+            }
+        ); 
+    }
+
+    if(following){ 
+        await User.populate(
+            user,
+            { 
+                path: 'following', 
+                model: 'User' ,
+                select: 'name profileImage'
+            }
+        ); 
+    }
+
+    return user;
+}
 }
 
 const userService = new UserService();
