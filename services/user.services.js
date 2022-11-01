@@ -2,66 +2,88 @@ const bcryptjs = require("bcryptjs");
 
 const User = require("../schemas/User");
 
-const { generateJWT, errorFactory } = require("../utils/utils");
+const { cloudinaryImageDelete } = require("../utils/cloudinaryImageDelete");
+const { cloudinaryImageUpload } = require("../utils/cloudinaryImageUpload");
+const { generateJWT, errorFactory, encryptPassword } = require("../utils/utils");
 
 class UserService {
-  save(name, email, password, profileImage) {
-    const user = new User({ name, email, password, profileImage });
-    return user.save();
-  }
 
-  async login(email, password) {
-    const user = await User.findOne({ email }).exec();
-    if (!user) {
-      throw errorFactory("User not found", 400);
+    save(name, email, password, profileImage) {
+        const user = new User({ name, email, password, profileImage });
+        return user.save(); 
     }
 
-    const validPassword = bcryptjs.compareSync(password, user.password);
-    if (!validPassword) {
-      throw errorFactory("Invalid password", 401);
-    }
+    async login(email, password) {
 
-    return {
-      user,
-      token: await generateJWT(user.id),
-    };
-  }
+        const user = await User.findOne({ email }).exec();
+        if(!user){
+            throw errorFactory("User not found", 400);
+        }
 
-  async getUserById(id, followers, following) {
-    const user = await User.findById(id).exec();
-    if(followers){ 
-        await User.populate(
+        const validPassword = bcryptjs.compareSync( password, user.password);
+        if(!validPassword){
+            throw errorFactory("Invalid password", 401);
+        }
+
+        return {
             user,
-            {
-                path: 'followers', 
-                model: 'User',
-                select: 'name profileImage'
-            }
-        ); 
+            token: await generateJWT(user.id)
+        };
+        
     }
 
-    if(following){ 
-        await User.populate(
-            user,
-            { 
-                path: 'following', 
-                model: 'User' ,
-                select: 'name profileImage'
-            }
-        ); 
+    async getUserById(id, followers, following) {
+        const user = await User.findById(id).exec();
+        if(followers){ 
+            await User.populate(
+                user,
+                {
+                    path: 'followers', 
+                    model: 'User',
+                    select: 'name profileImage'
+                }
+            ); 
+        }
+    
+        if(following){ 
+            await User.populate(
+                user,
+                { 
+                    path: 'following', 
+                    model: 'User' ,
+                    select: 'name profileImage'
+                }
+            ); 
+        }
+
+        return user;
     }
 
-    return user;
-  }
+    async getUsers(query, from, limit, sort) {
+        const [total, users] = await Promise.all([
+            User.countDocuments(query),
+            User.find(query).skip(from).limit(limit).sort(sort).exec()
+        ]);
+        return { total, users };
+    }
 
-  async getUsers(query, from, limit, sort) {
-    const [total, users] = await Promise.all([
-        User.countDocuments(query),
-        User.find(query).skip(from).limit(limit).sort(sort).exec()
-    ]);
-    return { total, users };
-  }
-  
+    async deleteUser(id){
+        const user = await User.findByIdAndDelete(id).exec();
+        cloudinaryImageDelete(user.profileImage, "Kisaragi");
+    }
+    
+    async updateUser(id, description, password, file){
+        const user = await User.findById(id).exec();
+        user.description = description;
+        if(password){
+            user.password = encryptPassword(password);
+        }
+        if(file){
+            cloudinaryImageDelete(user.profileImage, "Kisaragi");
+            user.profileImage = await cloudinaryImageUpload(file, "Kisaragi");
+        }
+        await user.save();
+    }
 }
 
 const userService = new UserService();
