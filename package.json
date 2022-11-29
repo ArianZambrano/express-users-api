@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
-    "start": "node app"
+    "start": "node app",
+    "lint": "npx eslint  \"**/*.js\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -21,6 +22,7 @@
     "nodemon": "^2.0.15"
   },
   "devDependencies": {
+    "eslint": "^8.28.0",
     "rs": "0.0.1"
   }
 }
