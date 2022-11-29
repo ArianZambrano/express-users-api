@@ -70,6 +70,7 @@ MONGODB_URI=<mongodb_uri>
 CLOUDINARY_URL=<cloudinary_cloud>
 SECRET_KEY=<jwt_secret>
 EXPIRATION_DATE=12hv
+```
 
 ### Installation
 
