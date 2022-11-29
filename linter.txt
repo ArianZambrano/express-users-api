@@ -1,26 +1,6 @@
 [0m[0m
-[0m[4mC:\Personal\dev\ciclo-x\proyecto-inga\express-users-api\middlewares\authToken.js[24m[0m
-[0m  [2m23:42[22m  [31merror[39m  'process' is not defined  [2mno-undef[22m[0m
-[0m[0m
-[0m[4mC:\Personal\dev\ciclo-x\proyecto-inga\express-users-api\server\database.js[24m[0m
-[0m  [2m5:28[22m  [31merror[39m  'process' is not defined  [2mno-undef[22m[0m
-[0m[0m
-[0m[4mC:\Personal\dev\ciclo-x\proyecto-inga\express-users-api\server\server.js[24m[0m
-[0m  [2m9:17[22m  [31merror[39m  'process' is not defined  [2mno-undef[22m[0m
-[0m[0m
 [0m[4mC:\Personal\dev\ciclo-x\proyecto-inga\express-users-api\services\follow.services.js[24m[0m
 [0m  [2m1:7[22m  [31merror[39m  'mongoose' is assigned a value but never used  [2mno-unused-vars[22m[0m
 [0m[0m
-[0m[4mC:\Personal\dev\ciclo-x\proyecto-inga\express-users-api\utils\cloudinaryImageDelete.js[24m[0m
-[0m  [2m3:20[22m  [31merror[39m  'process' is not defined  [2mno-undef[22m[0m
-[0m[0m
-[0m[4mC:\Personal\dev\ciclo-x\proyecto-inga\express-users-api\utils\cloudinaryImageUpload.js[24m[0m
-[0m  [2m5:19[22m  [31merror[39m  'process' is not defined  [2mno-undef[22m[0m
-[0m[0m
-[0m[4mC:\Personal\dev\ciclo-x\proyecto-inga\express-users-api\utils\utils.js[24m[0m
-[0m  [2m14:27[22m  [31merror[39m  'process' is not defined  [2mno-undef[22m[0m
-[0m  [2m15:24[22m  [31merror[39m  'process' is not defined  [2mno-undef[22m[0m
-[0m  [2m27:26[22m  [31merror[39m  'Buffer' is not defined   [2mno-undef[22m[0m
-[0m[0m
-[0m[31m[1m✖ 9 problems (9 errors, 0 warnings)[22m[39m[0m
+[0m[31m[1m✖ 1 problem (1 error, 0 warnings)[22m[39m[0m
 [0m[31m[1m[22m[39m[0m
