@@ -3,10 +3,15 @@ const UserService = require("../../../services/user.services");
 const { errorResponse } = require("../../../utils/responses");
 const { parseSort } = require("../../../utils/utils");
 
+/**
+ * Gets users
+ * @param req - Request
+ * @param res - Response
+ */
 const GetUsersFlow = async (req, res) => {
 
-    let { 
-        from = 0, 
+    let {
+        from = 0,
         limit = 5,
         name,
         sort = "id",
@@ -22,8 +27,8 @@ const GetUsersFlow = async (req, res) => {
     try {
         const { total: totalUsers, users } = await UserService.getUsers(query, from, limit, sort);
         return res.status(200).json({ totalUsers, users });
-    } 
-    catch(error) {
+    }
+    catch (error) {
         console.error(error);
         return errorResponse(res, "Getting users failed", error.message);
     }
