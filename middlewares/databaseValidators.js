@@ -1,5 +1,9 @@
 const User = require("../schemas/User");
 
+/**
+ * Validates that the username is unique
+ * @param userName - User name
+ */
 const uniqueUserName = async (userName) => {
   const userNameExists = await User.findOne({
     name: userName,
@@ -10,6 +14,10 @@ const uniqueUserName = async (userName) => {
   }
 };
 
+/**
+ * Validates that the email is unique
+ * @param userEmail - User email
+ */
 const uniqueUserEmail = async (userEmail) => {
   const userEmailExists = await User.findOne({
     email: userEmail,
@@ -20,14 +28,18 @@ const uniqueUserEmail = async (userEmail) => {
   }
 };
 
+/**
+ * Validates that the user exists on database
+ * @param userId - User id
+ */
 const userNotExists = async userId => {
 
   const userExists = await User.findById(userId).exec();
 
   if (!userExists) {
-      throw new Error('User does not exist on database.');
+    throw new Error('User does not exist on database.');
   }
-  
+
 }
 
 module.exports = {

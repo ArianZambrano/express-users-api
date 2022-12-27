@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
-
+/**
+ * Database connection
+ * @returns {Promise<void>}
+ */
 const databaseConnection = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {

@@ -3,6 +3,10 @@ const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const databaseConnection = require("./database");
 
+/**
+ * Server class for setting up the express server and database connection
+ * @class Server
+ */
 class Server {
   constructor() {
     this.app = express();
@@ -16,6 +20,10 @@ class Server {
     this.routes();
   }
 
+
+  /**
+   * Database connection
+   */
   async dbConnection() {
     await databaseConnection();
   }
@@ -36,10 +44,16 @@ class Server {
     );
   }
 
+  /**
+   * Setup application routes
+   */
   routes() {
     this.app.use("/api", require("../routes/index"));
   }
 
+  /**
+   * Listen port
+   */
   listen() {
     this.app.listen(this.port, () => {
       console.log("Listening port", this.port);

@@ -1,6 +1,11 @@
 const UserService = require("../../../services/user.services");
 const { errorResponse } = require("../../../utils/responses");
 
+/**
+ * Logs in a user
+ * @param req - Request
+ * @param res - Response
+ */
 const LoginUserFlow = async (req, res) => {
   try {
     const { email, password } = req.body;

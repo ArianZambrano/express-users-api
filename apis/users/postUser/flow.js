@@ -6,6 +6,11 @@ const {
 const { encryptPassword, generateJWT } = require("../../../utils/utils");
 const { errorResponse } = require("../../../utils/responses");
 
+/**
+ * Creates a user
+ * @param req 
+ * @param res 
+ */
 const PostUserFlow = async (req, res) => {
   const { name, email } = req.body;
   const password = encryptPassword(req.body.password);

@@ -1,8 +1,16 @@
 const mongoose = require("mongoose");
 const User = require("../schemas/User");
 
+/**
+ * Follow service for following or unfollowing users
+ * @class FollowService
+ * 
+ */
 class FollowService {
-
+    /**
+     * @param userId - User id
+     * @param followId - User id to follow
+     */
     async followUser(userId, followId) {
         const session = await User.startSession();
         session.startTransaction();
@@ -20,6 +28,10 @@ class FollowService {
         session.endSession();
     }
 
+    /**
+     * @param userId - User id
+     * @param unfollowId - User id to unfollow
+     */
     async unfollowUser(userId, unfollowId) {
         const session = await User.startSession();
         session.startTransaction();
@@ -39,6 +51,9 @@ class FollowService {
 
 }
 
+/**
+ * Follow service instance
+ */
 const followService = new FollowService();
 
 module.exports = followService;
